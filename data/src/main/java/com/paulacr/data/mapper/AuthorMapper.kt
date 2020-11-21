@@ -13,6 +13,7 @@ class AuthorMapper @Inject constructor() {
             listAuthors.add(Author(
                 id = it.id,
                 name = it.name,
+                username = it.username,
                 avatarUrl = it.avatarUrl
             ))
         }

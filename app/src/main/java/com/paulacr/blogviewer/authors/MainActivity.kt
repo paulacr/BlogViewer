@@ -7,11 +7,13 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.paging.LoadState
 import androidx.paging.PagingData
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulacr.blogviewer.ViewState
 import com.paulacr.blogviewer.databinding.ActivityAuthorsListBinding
 import com.paulacr.domain.Author
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -29,7 +31,12 @@ class MainActivity : AppCompatActivity() {
             when (it) {
                 is ViewState.Success -> {
                     Log.i("Authors", "data -> $it.data")
-                    setupList(it.data)
+
+                    if (adapter.itemCount > 0) {
+                        adapter.submitData(lifecycle, it.data)
+                    } else {
+                        setupList(it.data)
+                    }
                 }
                 is ViewState.Loading -> {
                     Log.i("Authors", "loading")
@@ -48,8 +55,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupList(authors: PagingData<Author>) {
         val recyclerView = binding.authorsList
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        val layoutManager = LinearLayoutManager(this)
+        val dividerItemDecoration = DividerItemDecoration(
+            recyclerView.context,
+            layoutManager.orientation
+        )
+
+        recyclerView.layoutManager = layoutManager
         recyclerView.adapter = adapter
+        recyclerView.addItemDecoration(dividerItemDecoration)
+
         adapter.submitData(lifecycle, authors)
         adapter.addLoadStateListener {
             if (it.source.append is LoadState.Loading) {
