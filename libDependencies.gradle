@@ -21,6 +21,8 @@ ext {
     // DI
     ext.daggerVersion = '2.29.1'
     ext.hiltLifecycleVersion = '1.0.0-alpha02'
+    ext.hiltTesting = '2.29.1-alpha'
+    ext.roboelectricAnnotationsVersion = '4.4'
 
     // Tests
     jUnitVersion = '4.13.1'
@@ -33,4 +35,5 @@ ext {
     mockkVersion = '1.10.2'
     androidTestRules = '1.3.0'
     androidTestRunner = '1.1.1'
+    idlingResourceVersion = '1.0.0'
 }

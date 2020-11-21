@@ -1,6 +1,7 @@
 package com.paulacr.data.repository
 
 import androidx.paging.rxjava2.RxPagingSource
+import com.paulacr.data.common.logError
 import com.paulacr.data.mapper.AuthorMapper
 import com.paulacr.data.mapper.PostMapper
 import com.paulacr.data.network.ApiService
@@ -38,5 +39,11 @@ class GetAuthorsPagingSource @Inject constructor(
     }
 
     fun getPostsByAuthorId(id: Int): Single<List<Post>> =
-        api.getPostsByAuthorId(id).map(postsMapper::map)
+        api.getPostsByAuthorId(id)
+            .subscribeOn(Schedulers.io())
+            .doOnError {
+                logError("Error posts", it)
+            }
+            .map(postsMapper::map)
+
 }

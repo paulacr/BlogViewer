@@ -84,4 +84,9 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-v4'
         exclude module: 'recyclerview-v7'
     }
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$hiltTesting"
+    androidTestImplementation "org.robolectric:annotations:$roboelectricAnnotationsVersion"
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:$mockWebServerVersion"
+    androidTestImplementation "com.jakewharton.espresso:okhttp3-idling-resource:$idlingResourceVersion"
+
 }
