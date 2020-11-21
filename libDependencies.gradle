@@ -6,6 +6,18 @@ ext {
     appCompatVersion = '1.2.0'
     materialDesignVersion = '1.2.1'
     constraintLayoutVersion = '2.0.4'
+    androidXActivityVersion = '1.1.0'
+
+    // Network
+    ext.retrofitVersion = '2.9.0'
+    ext.rxjavaVersion = '2.2.9'
+    ext.RxJavaAdapterVersion = "2.9.0"
+    ext.rxAndroidVersion = '2.1.1'
+    ext.OkhttpVersion = '4.9.0'
+
+    // DI
+    ext.daggerVersion = '2.29.1'
+    ext.hiltLifecycleVersion = '1.0.0-alpha02'
 
     // Tests
     jUnitVersion = '4.13.1'
