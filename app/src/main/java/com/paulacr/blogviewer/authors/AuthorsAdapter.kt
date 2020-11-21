@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import com.paulacr.blogviewer.BaseViewHolder
 import com.paulacr.blogviewer.databinding.ItemAuthorBinding
 import com.paulacr.domain.Author

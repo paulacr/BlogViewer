@@ -2,8 +2,10 @@ package com.paulacr.blogviewer.authors
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulacr.blogviewer.ViewState
@@ -49,5 +51,12 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
         adapter.submitData(lifecycle, authors)
+        adapter.addLoadStateListener {
+            if (it.source.append is LoadState.Loading) {
+                binding.loadingItemsView.visibility = View.VISIBLE
+            } else {
+                binding.loadingItemsView.visibility = View.INVISIBLE
+            }
+        }
     }
 }
