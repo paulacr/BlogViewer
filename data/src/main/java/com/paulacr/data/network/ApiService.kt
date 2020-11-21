@@ -3,9 +3,12 @@ package com.paulacr.data.network
 import com.paulacr.domain.AuthorRawData
 import io.reactivex.Single
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface ApiService {
 
     @GET("/authors")
-    fun getAuthors(): Single<List<AuthorRawData>>
+    fun getAuthors(
+        @Query ("_page") page: Int
+    ): Single<List<AuthorRawData>>
 }

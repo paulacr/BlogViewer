@@ -7,6 +7,7 @@ ext {
     materialDesignVersion = '1.2.1'
     constraintLayoutVersion = '2.0.4'
     androidXActivityVersion = '1.1.0'
+    pagingVersion = '3.0.0-alpha09'
 
     // Network
     ext.retrofitVersion = '2.9.0'

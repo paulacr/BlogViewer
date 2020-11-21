@@ -2,6 +2,7 @@ package com.paulacr.blogviewer.authors
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.PagingData
 import com.paulacr.blogviewer.BaseViewModel
 import com.paulacr.blogviewer.ViewState
 import com.paulacr.data.common.logError
@@ -13,7 +14,7 @@ import io.reactivex.schedulers.Schedulers
 class AuthorsViewModel @ViewModelInject constructor(private val useCase: AuthorUseCase) :
     BaseViewModel() {
 
-    val authorsLiveData = MutableLiveData<ViewState<List<Author>>>()
+    val authorsLiveData = MutableLiveData<ViewState<PagingData<Author>>>()
 
     fun getAuthors() {
         useCase.getAuthor()

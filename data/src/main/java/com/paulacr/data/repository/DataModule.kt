@@ -18,6 +18,10 @@ class DataModule {
         AuthorUseCaseImpl(repository)
 
     @Provides
-    fun provideAuthorRepository(apiService: ApiService, mapper: AuthorMapper): BlogRepository =
-        BlogRepositoryImpl(apiService, mapper)
+    fun provideAuthorRepository(pagingSource: GetAuthorsPagingSource): BlogRepository =
+        BlogRepositoryImpl(pagingSource)
+
+    @Provides
+    fun providePagingSource(apiService: ApiService, mapper: AuthorMapper): GetAuthorsPagingSource =
+        GetAuthorsPagingSource(apiService, mapper)
 }

@@ -2,8 +2,11 @@ package com.paulacr.blogviewer.authors
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.paging.LoadState
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulacr.blogviewer.ViewState
 import com.paulacr.blogviewer.databinding.ActivityAuthorsListBinding
@@ -15,13 +18,12 @@ class MainActivity : AppCompatActivity() {
 
     val viewModel: AuthorsViewModel by viewModels()
     lateinit var binding: ActivityAuthorsListBinding
+    private val adapter = AuthorsAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAuthorsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        viewModel.getAuthors()
 
         viewModel.authorsLiveData.observe(this, {
             when (it) {
@@ -39,10 +41,22 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun setupList(authors: List<Author>) {
+    override fun onResume() {
+        super.onResume()
+        viewModel.getAuthors()
+    }
+
+    private fun setupList(authors: PagingData<Author>) {
         val recyclerView = binding.authorsList
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = AuthorsAdapter(authors, { position, author ->
-        })
+        recyclerView.adapter = adapter
+        adapter.submitData(lifecycle, authors)
+        adapter.addLoadStateListener {
+            if (it.source.append is LoadState.Loading) {
+                binding.loadingItemsView.visibility = View.VISIBLE
+            } else {
+                binding.loadingItemsView.visibility = View.INVISIBLE
+            }
+        }
     }
 }
