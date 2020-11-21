@@ -8,7 +8,7 @@ import com.paulacr.blogviewer.BaseViewHolder
 import com.paulacr.blogviewer.databinding.ItemAuthorBinding
 import com.paulacr.domain.Author
 
-class AuthorsAdapter : PagingDataAdapter<Author, BaseViewHolder<*>>(COMPARATOR) {
+class AuthorsAdapter(private val clickListener: (Author) -> Unit) : PagingDataAdapter<Author, BaseViewHolder<*>>(COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -17,8 +17,14 @@ class AuthorsAdapter : PagingDataAdapter<Author, BaseViewHolder<*>>(COMPARATOR) 
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
-        getItem(position)?.let {
-            (holder as AuthorViewHolder).bind(it)
+        getItem(position)?.let { author ->
+
+            (holder as AuthorViewHolder).apply {
+                bind(author)
+                itemView.setOnClickListener {
+                    clickListener(author)
+                }
+            }
         }
     }
 
