@@ -2,13 +2,14 @@ package com.paulacr.blogviewer.authors
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.paulacr.blogviewer.BaseViewHolder
 import com.paulacr.blogviewer.databinding.ItemAuthorBinding
 import com.paulacr.domain.Author
 
-class AuthorsAdapter(private val authorsList: List<Author>, listener: (Int, Author) -> Unit) :
-    RecyclerView.Adapter<BaseViewHolder<*>>() {
+class AuthorsAdapter : PagingDataAdapter<Author, BaseViewHolder<*>>(COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -16,10 +17,10 @@ class AuthorsAdapter(private val authorsList: List<Author>, listener: (Int, Auth
         return AuthorViewHolder(itemBinding)
     }
 
-    override fun getItemCount(): Int = authorsList.size
-
     override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
-        (holder as AuthorViewHolder).bind(authorsList[position])
+        getItem(position)?.let {
+            (holder as AuthorViewHolder).bind(it)
+        }
     }
 
     class AuthorViewHolder(private val binding: ItemAuthorBinding) : BaseViewHolder<Author>(binding) {
@@ -27,6 +28,18 @@ class AuthorsAdapter(private val authorsList: List<Author>, listener: (Int, Auth
         override fun bind(item: Author) {
             binding.author = item
             binding.executePendingBindings()
+        }
+    }
+
+    companion object {
+        private val COMPARATOR = object : DiffUtil.ItemCallback<Author>() {
+            override fun areItemsTheSame(oldItem: Author, newItem: Author): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: Author, newItem: Author): Boolean {
+                return oldItem == newItem
+            }
         }
     }
 }
