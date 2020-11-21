@@ -14,13 +14,15 @@ import com.paulacr.blogviewer.databinding.ActivityAuthorsListBinding
 import com.paulacr.domain.Author
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     val viewModel: AuthorsViewModel by viewModels()
     lateinit var binding: ActivityAuthorsListBinding
-    private val adapter = AuthorsAdapter()
+    private val adapter = AuthorsAdapter { author ->
+        // todo create intent to detail screen
+        Log.i("item clicked", "result -> ${author.id}}")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
