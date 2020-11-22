@@ -8,6 +8,7 @@ import androidx.paging.rxjava2.flowable
 import com.paulacr.data.mapper.AuthorMapper
 import com.paulacr.data.network.ApiService
 import com.paulacr.domain.Author
+import com.paulacr.domain.Post
 import io.reactivex.Flowable
 import io.reactivex.Single
 import javax.inject.Inject
@@ -15,6 +16,8 @@ import javax.inject.Inject
 interface BlogRepository {
 
     fun getAuthors(): Flowable<PagingData<Author>>
+
+    fun getPostsByAuthorId(id: Int): Single<List<Post>>
 }
 
 class BlogRepositoryImpl @Inject constructor(private val pagingSource: GetAuthorsPagingSource) : BlogRepository {
@@ -29,4 +32,7 @@ class BlogRepositoryImpl @Inject constructor(private val pagingSource: GetAuthor
                 initialLoadSize = 40),
             pagingSourceFactory = { pagingSource }
         ).flowable
+
+    override fun getPostsByAuthorId(id: Int): Single<List<Post>> = pagingSource.getPostsByAuthorId(id)
+
 }
