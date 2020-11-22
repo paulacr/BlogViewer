@@ -1,4 +1,4 @@
-package com.paulacr.blogviewer.details
+package com.paulacr.blogviewer.feature.posts
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData

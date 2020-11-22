@@ -1,4 +1,4 @@
-package com.paulacr.blogviewer.authors
+package com.paulacr.blogviewer.feature.authors
 
 import android.os.Bundle
 import android.util.Log
@@ -11,17 +11,17 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulacr.blogviewer.ViewState
 import com.paulacr.blogviewer.databinding.ActivityAuthorsListBinding
-import com.paulacr.blogviewer.details.DetailsActivity
+import com.paulacr.blogviewer.feature.posts.PostsActivity
 import com.paulacr.domain.Author
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class AuthorsListActivity : AppCompatActivity() {
 
-    private val viewModel: AuthorsViewModel by viewModels()
+    private val listViewModel: AuthorsListViewModel by viewModels()
     lateinit var binding: ActivityAuthorsListBinding
-    private val adapter = AuthorsAdapter { author ->
-        startActivity(DetailsActivity.detailActivityIntent(this, author))
+    private val adapter = AuthorsListAdapter { author ->
+        startActivity(PostsActivity.detailActivityIntent(this, author))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,11 +33,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        viewModel.getAuthors()
+        listViewModel.getAuthors()
     }
 
     private fun observeAuthorsLiveData() {
-        viewModel.authorsLiveData.observe(this, {
+        listViewModel.authorsLiveData.observe(this, {
             when (it) {
                 is ViewState.Success -> {
                     binding.loadingView.visibility = View.GONE

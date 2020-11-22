@@ -1,4 +1,4 @@
-package com.paulacr.blogviewer.details
+package com.paulacr.blogviewer.feature.posts
 
 import android.app.Activity
 import android.content.Intent
@@ -17,7 +17,7 @@ import com.paulacr.domain.Post
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DetailsActivity : AppCompatActivity() {
+class PostsActivity : AppCompatActivity() {
 
     private val detailsViewModel: PostsViewModel by viewModels()
     private lateinit var binding: ActivityDetailBinding
@@ -74,7 +74,7 @@ class DetailsActivity : AppCompatActivity() {
         private const val AUTHOR_EXTRA_KEY = "details_extra_key"
 
         fun detailActivityIntent(activity: Activity, author: Author) =
-            Intent(activity, DetailsActivity::class.java)
+            Intent(activity, PostsActivity::class.java)
                 .putExtra(AUTHOR_EXTRA_KEY, author)
     }
 }

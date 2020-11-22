@@ -1,4 +1,4 @@
-package com.paulacr.blogviewer.authors
+package com.paulacr.blogviewer.feature.authors
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +11,7 @@ import com.paulacr.domain.Author
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class AuthorsViewModel @ViewModelInject constructor(private val useCase: AuthorUseCase) :
+class AuthorsListViewModel @ViewModelInject constructor(private val useCase: AuthorUseCase) :
     BaseViewModel() {
 
     val authorsLiveData = MutableLiveData<ViewState<PagingData<Author>>>()

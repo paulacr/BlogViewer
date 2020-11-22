@@ -1,4 +1,4 @@
-package com.paulacr.blogviewer.authors
+package com.paulacr.blogviewer.feature.authors
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import com.paulacr.blogviewer.BaseViewHolder
 import com.paulacr.blogviewer.databinding.ItemAuthorBinding
 import com.paulacr.domain.Author
 
-class AuthorsAdapter(private val clickListener: (Author) -> Unit) : PagingDataAdapter<Author, BaseViewHolder<*>>(COMPARATOR) {
+class AuthorsListAdapter(private val clickListener: (Author) -> Unit) : PagingDataAdapter<Author, BaseViewHolder<*>>(COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
         val layoutInflater = LayoutInflater.from(parent.context)
