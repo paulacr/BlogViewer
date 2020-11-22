@@ -2,15 +2,18 @@ package com.paulacr.data.repository
 
 import androidx.paging.rxjava2.RxPagingSource
 import com.paulacr.data.mapper.AuthorMapper
+import com.paulacr.data.mapper.PostMapper
 import com.paulacr.data.network.ApiService
 import com.paulacr.domain.Author
+import com.paulacr.domain.Post
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class GetAuthorsPagingSource @Inject constructor(
     private val api: ApiService,
-    private val mapper: AuthorMapper
+    private val authorMapper: AuthorMapper,
+    private val postsMapper: PostMapper
 ) :
     RxPagingSource<Int, Author>() {
 
@@ -19,7 +22,7 @@ class GetAuthorsPagingSource @Inject constructor(
 
         return api.getAuthors(position)
             .subscribeOn(Schedulers.io())
-            .map(mapper::map)
+            .map(authorMapper::map)
             .map {
                 toLoadResult(it, position)
             }
@@ -34,5 +37,6 @@ class GetAuthorsPagingSource @Inject constructor(
         )
     }
 
-
+    fun getPostsByAuthorId(id: Int): Single<List<Post>> =
+        api.getPostsByAuthorId(id).map(postsMapper::map)
 }
