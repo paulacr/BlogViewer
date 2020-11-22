@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BlogViewer</string>
+    <string name="errorLoadingAuthorsMessage">"Error Loading Authors "</string>
 </resources>

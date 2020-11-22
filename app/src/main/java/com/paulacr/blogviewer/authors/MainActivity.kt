@@ -18,20 +18,31 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    val viewModel: AuthorsViewModel by viewModels()
+    private val viewModel: AuthorsViewModel by viewModels()
     lateinit var binding: ActivityAuthorsListBinding
     private val adapter = AuthorsAdapter { author ->
-        startActivity(DetailsActivity.detailActivityIntent(this, author.id))
+        startActivity(DetailsActivity.detailActivityIntent(this, author))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAuthorsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        observeAuthorsLiveData()
+    }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getAuthors()
+    }
+
+    private fun observeAuthorsLiveData() {
         viewModel.authorsLiveData.observe(this, {
             when (it) {
                 is ViewState.Success -> {
+                    binding.loadingView.visibility = View.GONE
+                    binding.authorsList.visibility = View.VISIBLE
+                    binding.errorState.visibility = View.GONE
                     Log.i("Authors", "data -> $it.data")
 
                     if (adapter.itemCount > 0) {
@@ -41,18 +52,19 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 is ViewState.Loading -> {
+                    binding.loadingView.visibility = View.VISIBLE
+                    binding.authorsList.visibility = View.GONE
+                    binding.errorState.visibility = View.GONE
                     Log.i("Authors", "loading")
                 }
                 is ViewState.Failure -> {
+                    binding.loadingView.visibility = View.GONE
+                    binding.authorsList.visibility = View.GONE
+                    binding.errorState.visibility = View.VISIBLE
                     Log.i("Authors", "error")
                 }
             }
         })
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.getAuthors()
     }
 
     private fun setupList(authors: PagingData<Author>) {

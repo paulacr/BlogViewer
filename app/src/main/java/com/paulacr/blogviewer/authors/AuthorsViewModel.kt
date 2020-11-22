@@ -17,10 +17,8 @@ class AuthorsViewModel @ViewModelInject constructor(private val useCase: AuthorU
     val authorsLiveData = MutableLiveData<ViewState<PagingData<Author>>>()
 
     fun getAuthors() {
+        authorsLiveData.postValue(ViewState.Loading())
         useCase.getAuthor()
-            .doOnSubscribe {
-                authorsLiveData.postValue(ViewState.Loading())
-            }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
