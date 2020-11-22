@@ -6,8 +6,12 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import com.paulacr.blogviewer.ViewState
 import com.paulacr.blogviewer.databinding.ActivityDetailBinding
+import com.paulacr.domain.Post
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,6 +31,7 @@ class DetailsActivity : AppCompatActivity() {
             when (it) {
                 is ViewState.Success -> {
                     Log.i("Authors", "data -> $it.data")
+                    setupList(it.data)
                 }
                 is ViewState.Loading -> {
                     Log.i("Authors", "loading")
@@ -38,6 +43,21 @@ class DetailsActivity : AppCompatActivity() {
         })
 
         detailsViewModel.getPostsByAuthorId(authorId)
+    }
+
+    private fun setupList(posts: List<Post>) {
+        val recyclerView = binding.postsList
+        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        val dividerItemDecoration = DividerItemDecoration(
+            recyclerView.context,
+            layoutManager.orientation
+        )
+
+        recyclerView.layoutManager = layoutManager
+        recyclerView.adapter = PostsAdapter(posts)
+        recyclerView.addItemDecoration(dividerItemDecoration)
+        val snapHelper = PagerSnapHelper()
+        snapHelper.attachToRecyclerView(recyclerView)
     }
 
     companion object {
