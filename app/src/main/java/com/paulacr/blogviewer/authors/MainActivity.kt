@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulacr.blogviewer.ViewState
 import com.paulacr.blogviewer.databinding.ActivityAuthorsListBinding
+import com.paulacr.blogviewer.details.DetailsActivity
 import com.paulacr.domain.Author
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,8 +21,7 @@ class MainActivity : AppCompatActivity() {
     val viewModel: AuthorsViewModel by viewModels()
     lateinit var binding: ActivityAuthorsListBinding
     private val adapter = AuthorsAdapter { author ->
-        // todo create intent to detail screen
-        Log.i("item clicked", "result -> ${author.id}}")
+        startActivity(DetailsActivity.detailActivityIntent(this, author.id))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
