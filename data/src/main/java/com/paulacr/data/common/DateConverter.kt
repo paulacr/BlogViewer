@@ -1,6 +1,7 @@
 package com.paulacr.data.common
 
 import java.time.Instant
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -12,6 +13,10 @@ fun Long.getFormattedDateTime(): Pair<String, String> {
     val currentDateTime = LocalDateTime.ofInstant(Instant.ofEpochSecond(this), ZoneId.systemDefault())
 
     return getFormattedDate(currentDateTime) to getFormattedTime(currentDateTime)
+}
+
+fun String.getDateTime(): LocalDateTime {
+    return LocalDateTime.parse(this, DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
 }
 
 private fun getFormattedDate(localDateTime: LocalDateTime): String {
