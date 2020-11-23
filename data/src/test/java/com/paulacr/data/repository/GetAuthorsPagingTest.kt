@@ -4,12 +4,16 @@ import androidx.paging.PagingSource
 import com.paulacr.data.mapper.AuthorMapper
 import com.paulacr.data.mapper.PostMapper
 import com.paulacr.data.network.ApiService
-import com.paulacr.domain.*
+import com.paulacr.domain.AddressResponse
+import com.paulacr.domain.AuthorResponse
+import com.paulacr.domain.Post
+import com.paulacr.domain.PostResponse
+import com.paulacr.domain.Author
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.Single
-import junit.framework.Assert.assertEquals
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import java.time.LocalDateTime
@@ -51,7 +55,16 @@ class GetAuthorsPagingTest {
     fun shouldMapPostsResponseToPosts() {
         pagingSource.getPostsByAuthorId(1)
 
-        val postResult = listOf(Post(2, LocalDateTime.parse("2017-01-29T23:53:33.320"), "Post title", "some post description, post text here","https://posturl/john", 1))
+        val postResult = listOf(
+            Post(
+                2,
+                LocalDateTime.parse("2017-01-29T23:53:33.320"),
+                "Post title",
+                "some post description, post text here",
+                "https://posturl/john",
+                1
+            )
+        )
         assertEquals(postResult, postsMapper.map(postsResponse))
         assertEquals(1, postResult.size)
     }
