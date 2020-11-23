@@ -1,6 +1,6 @@
 package com.paulacr.domain
 
-import java.time.LocalDateTime
+import org.threeten.bp.LocalDateTime
 
 data class Post(
     val id: Int,

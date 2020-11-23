@@ -10,5 +10,6 @@
     <!--Text Sizes-->
     <dimen name="default_text_size_16dp">16dp</dimen>
     <dimen name="default_text_size_14dp">14dp</dimen>
+    <dimen name="default_dimen_16sp">16sp</dimen>
 
 </resources>

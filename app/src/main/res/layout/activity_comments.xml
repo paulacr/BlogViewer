@@ -15,18 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <TextView
-        android:id="@+id/authorInfo"
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:textSize="@dimen/default_dimen_16sp"
-        android:textStyle="bold"
-        android:layout_marginTop="@dimen/default_dimen_16dp"
-        android:layout_marginBottom="@dimen/default_dimen_16dp"
-        android:layout_height="wrap_content"
-        tools:text="author name"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+    <include layout="@layout/item_posts"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/postsList"

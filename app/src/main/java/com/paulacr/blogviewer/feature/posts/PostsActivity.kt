@@ -8,6 +8,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.paulacr.blogviewer.ViewState
@@ -26,8 +27,6 @@ class PostsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val author = intent.extras?.get(AUTHOR_EXTRA_KEY) as Author
 
         detailsViewModel.postsLiveData.observe(this, {
             when (it) {
@@ -51,22 +50,19 @@ class PostsActivity : AppCompatActivity() {
                 }
             }
         })
-        detailsViewModel.getPostsByAuthorId(author.id)
+
+        val author = intent.extras?.get(AUTHOR_EXTRA_KEY) as Author?
+        author?.let {
+            binding.authorInfo.text = author.name
+            detailsViewModel.getPostsByAuthorId(it.id)
+        }
     }
 
     private fun setupList(posts: List<Post>) {
         val recyclerView = binding.postsList
-        val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        val dividerItemDecoration = DividerItemDecoration(
-            recyclerView.context,
-            layoutManager.orientation
-        )
-
+        val layoutManager = GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = PostsAdapter(posts)
-        recyclerView.addItemDecoration(dividerItemDecoration)
-        val snapHelper = PagerSnapHelper()
-        snapHelper.attachToRecyclerView(recyclerView)
     }
 
     companion object {
