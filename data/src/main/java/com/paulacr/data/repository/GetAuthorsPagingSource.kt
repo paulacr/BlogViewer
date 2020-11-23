@@ -1,6 +1,7 @@
 package com.paulacr.data.repository
 
 import androidx.paging.rxjava2.RxPagingSource
+import com.paulacr.data.AuthorCache
 import com.paulacr.data.mapper.AuthorMapper
 import com.paulacr.data.mapper.PostMapper
 import com.paulacr.data.network.ApiService
@@ -13,20 +14,28 @@ import javax.inject.Inject
 class GetAuthorsPagingSource @Inject constructor(
     private val api: ApiService,
     private val authorMapper: AuthorMapper,
-    private val postsMapper: PostMapper
+    private val postsMapper: PostMapper,
+    private val authorCache: AuthorCache
 ) :
     RxPagingSource<Int, Author>() {
 
     override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, Author>> {
         val position = params.key ?: 1
 
-        return api.getAuthors(position)
-            .subscribeOn(Schedulers.io())
-            .map(authorMapper::map)
-            .map {
+        return Single.just(authorCache.getAuthorData())
+            .flatMap {
+                if (it.isEmpty()) {
+                    api.getAuthors(position)
+                        .subscribeOn(Schedulers.io())
+                        .map(authorMapper::map)
+                } else {
+                    Single.just(it)
+                }
+            }.map {
                 toLoadResult(it, position)
             }
             .onErrorReturn { LoadResult.Error(it) }
+
     }
 
     private fun toLoadResult(data: List<Author>, position: Int): LoadResult<Int, Author> {
