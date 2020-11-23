@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BlogViewer">
-        <activity android:name="com.paulacr.blogviewer.feature.authors.AuthorsListActivity">
+        <activity android:name="com.paulacr.blogviewer.feature.authors.AuthorsListActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +21,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.paulacr.blogviewer.feature.posts.PostsActivity"/>
+        <activity android:name="com.paulacr.blogviewer.feature.posts.PostsActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
