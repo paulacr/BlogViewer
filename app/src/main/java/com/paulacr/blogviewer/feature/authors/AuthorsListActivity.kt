@@ -1,4 +1,4 @@
-package com.paulacr.blogviewer.authors
+package com.paulacr.blogviewer.feature.authors
 
 import android.os.Bundle
 import android.util.Log
@@ -11,27 +11,38 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulacr.blogviewer.ViewState
 import com.paulacr.blogviewer.databinding.ActivityAuthorsListBinding
-import com.paulacr.blogviewer.details.DetailsActivity
+import com.paulacr.blogviewer.feature.posts.PostsActivity
 import com.paulacr.domain.Author
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class AuthorsListActivity : AppCompatActivity() {
 
-    val viewModel: AuthorsViewModel by viewModels()
+    private val listViewModel: AuthorsListViewModel by viewModels()
     lateinit var binding: ActivityAuthorsListBinding
-    private val adapter = AuthorsAdapter { author ->
-        startActivity(DetailsActivity.detailActivityIntent(this, author.id))
+    private val adapter = AuthorsListAdapter { author ->
+        startActivity(PostsActivity.detailActivityIntent(this, author))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAuthorsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        observeAuthorsLiveData()
+    }
 
-        viewModel.authorsLiveData.observe(this, {
+    override fun onResume() {
+        super.onResume()
+        listViewModel.getAuthors()
+    }
+
+    private fun observeAuthorsLiveData() {
+        listViewModel.authorsLiveData.observe(this, {
             when (it) {
                 is ViewState.Success -> {
+                    binding.loadingView.visibility = View.GONE
+                    binding.authorsList.visibility = View.VISIBLE
+                    binding.errorState.visibility = View.GONE
                     Log.i("Authors", "data -> $it.data")
 
                     if (adapter.itemCount > 0) {
@@ -41,18 +52,19 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 is ViewState.Loading -> {
+                    binding.loadingView.visibility = View.VISIBLE
+                    binding.authorsList.visibility = View.GONE
+                    binding.errorState.visibility = View.GONE
                     Log.i("Authors", "loading")
                 }
                 is ViewState.Failure -> {
+                    binding.loadingView.visibility = View.GONE
+                    binding.authorsList.visibility = View.GONE
+                    binding.errorState.visibility = View.VISIBLE
                     Log.i("Authors", "error")
                 }
             }
         })
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.getAuthors()
     }
 
     private fun setupList(authors: PagingData<Author>) {

@@ -1,4 +1,4 @@
-package com.paulacr.blogviewer.details
+package com.paulacr.blogviewer.feature.posts
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

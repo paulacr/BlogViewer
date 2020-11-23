@@ -5,7 +5,7 @@ buildscript {
     ext.buildToolsVersion = "4.1.0"
     ext.kotlinVersion = '1.4.10'
     ext.ktlintVersion = '9.2.1'
-    ext.hiltVersion = '2.28-alpha'
+    ext.hiltVersion = '2.29.1-alpha'
 
     repositories {
         google()

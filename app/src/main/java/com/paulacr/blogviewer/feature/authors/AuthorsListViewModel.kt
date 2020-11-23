@@ -1,32 +1,31 @@
-package com.paulacr.blogviewer.details
+package com.paulacr.blogviewer.feature.authors
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.PagingData
 import com.paulacr.blogviewer.BaseViewModel
 import com.paulacr.blogviewer.ViewState
 import com.paulacr.data.common.logError
 import com.paulacr.data.usecase.AuthorUseCase
-import com.paulacr.domain.Post
+import com.paulacr.domain.Author
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class PostsViewModel @ViewModelInject constructor(private val useCase: AuthorUseCase) :
+class AuthorsListViewModel @ViewModelInject constructor(private val useCase: AuthorUseCase) :
     BaseViewModel() {
 
-    val postsLiveData = MutableLiveData<ViewState<List<Post>>>()
+    val authorsLiveData = MutableLiveData<ViewState<PagingData<Author>>>()
 
-    fun getPostsByAuthorId(authorId: Int) {
-        useCase.getPostsByAuthorId(authorId)
-            .doOnSubscribe {
-                postsLiveData.postValue(ViewState.Loading())
-            }
+    fun getAuthors() {
+        authorsLiveData.postValue(ViewState.Loading())
+        useCase.getAuthor()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                postsLiveData.postValue(ViewState.Success(it))
+                authorsLiveData.postValue(ViewState.Success(it))
             }, {
                 logError("Authors error", it)
-                postsLiveData.postValue(ViewState.Failure(it))
+                authorsLiveData.postValue(ViewState.Failure(it))
             }).addToDisposables()
     }
 }

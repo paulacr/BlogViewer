@@ -1,4 +1,4 @@
-package com.paulacr.blogviewer.common
+package com.paulacr.blogviewer.bindingadapters
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter

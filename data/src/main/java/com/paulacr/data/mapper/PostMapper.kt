@@ -1,8 +1,6 @@
 package com.paulacr.data.mapper
 
 import com.paulacr.data.common.getDateTime
-import com.paulacr.domain.Author
-import com.paulacr.domain.AuthorResponse
 import com.paulacr.domain.Post
 import com.paulacr.domain.PostResponse
 import javax.inject.Inject

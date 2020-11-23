@@ -3,10 +3,7 @@ package com.paulacr.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.PagingSource
 import androidx.paging.rxjava2.flowable
-import com.paulacr.data.mapper.AuthorMapper
-import com.paulacr.data.network.ApiService
 import com.paulacr.domain.Author
 import com.paulacr.domain.Post
 import io.reactivex.Flowable
