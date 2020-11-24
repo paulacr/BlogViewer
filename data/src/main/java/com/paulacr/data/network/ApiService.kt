@@ -5,6 +5,7 @@ import com.paulacr.domain.CommentResponse
 import com.paulacr.domain.PostResponse
 import io.reactivex.Single
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
@@ -19,8 +20,8 @@ interface ApiService {
         @Query ("authorId") authorId: Int
     ): Single<List<PostResponse>>
 
-    @GET("/comments")
+    @GET("/posts/{postId}/comments?_sort=date&_order=asc")
     fun getCommentsByUsername(
-        @Query ("username") username: String
+        @Path("postId") postId: Int
     ): Single<List<CommentResponse>>
 }
