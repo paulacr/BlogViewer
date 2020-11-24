@@ -15,7 +15,7 @@ interface AuthorUseCase {
 
     fun getPostsByAuthorId(id: Int): Single<List<Post>>
 
-    fun getCommentsByUsername(username: String): Single<List<Comment>>
+    fun getCommentsByUsername(postId: Int): Single<List<Comment>>
 }
 
 class AuthorUseCaseImpl @Inject constructor(private val repository: BlogRepository) : AuthorUseCase {
@@ -23,6 +23,6 @@ class AuthorUseCaseImpl @Inject constructor(private val repository: BlogReposito
 
     override fun getPostsByAuthorId(id: Int): Single<List<Post>> = repository.getPostsByAuthorId(id)
 
-    override fun getCommentsByUsername(username: String): Single<List<Comment>> =
-        repository.getCommentsByUsername(username)
+    override fun getCommentsByUsername(postId: Int): Single<List<Comment>> =
+        repository.getCommentsByUsername(postId)
 }

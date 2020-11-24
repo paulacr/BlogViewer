@@ -17,7 +17,7 @@ interface BlogRepository {
 
     fun getPostsByAuthorId(id: Int): Single<List<Post>>
 
-    fun getCommentsByUsername(username: String): Single<List<Comment>>
+    fun getCommentsByUsername(postId: Int): Single<List<Comment>>
 }
 
 class BlogRepositoryImpl @Inject constructor(private val pagingSource: GetAuthorsPagingSource) : BlogRepository {
@@ -35,6 +35,6 @@ class BlogRepositoryImpl @Inject constructor(private val pagingSource: GetAuthor
 
     override fun getPostsByAuthorId(id: Int): Single<List<Post>> = pagingSource.getPostsByAuthorId(id)
 
-    override fun getCommentsByUsername(username: String): Single<List<Comment>> = pagingSource.getCommentsByUsername(username)
+    override fun getCommentsByUsername(postId: Int): Single<List<Comment>> = pagingSource.getCommentsByUsername(postId)
 
 }

@@ -49,8 +49,8 @@ class GetAuthorsPagingSource @Inject constructor(
             }
             .map(postsMapper::map)
 
-    fun getCommentsByUsername(username: String): Single<List<Comment>> =
-        api.getCommentsByUsername(username)
+    fun getCommentsByUsername(postId: Int): Single<List<Comment>> =
+        api.getCommentsByUsername(postId)
             .subscribeOn(Schedulers.io())
             .doOnError {
                 logError("Error posts", it)

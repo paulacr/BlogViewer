@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">BlogViewer</string>
     <string name="errorLoadingAuthorsMessage">"Error Loading Authors "</string>
+    <string name="username_prefix">Username: %1$s</string>
 </resources>

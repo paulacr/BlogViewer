@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.paulacr.blogviewer.ViewState
 import com.paulacr.blogviewer.databinding.ActivityDetailBinding
+import com.paulacr.blogviewer.feature.authors.AuthorsListAdapter
+import com.paulacr.blogviewer.feature.comments.CommentsActivity.Companion.commentActivityIntent
 import com.paulacr.domain.Author
 import com.paulacr.domain.Post
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,6 +24,7 @@ class PostsActivity : AppCompatActivity() {
 
     private val detailsViewModel: PostsViewModel by viewModels()
     private lateinit var binding: ActivityDetailBinding
+    private lateinit var author: Author
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,10 +54,10 @@ class PostsActivity : AppCompatActivity() {
             }
         })
 
-        val author = intent.extras?.get(AUTHOR_EXTRA_KEY) as Author?
-        author?.let {
+        author = intent.extras?.get(AUTHOR_EXTRA_KEY) as Author
+        author.apply {
             binding.authorInfo.text = author.name
-            detailsViewModel.getPostsByAuthorId(it.id)
+            detailsViewModel.getPostsByAuthorId(id)
         }
     }
 
@@ -62,7 +65,9 @@ class PostsActivity : AppCompatActivity() {
         val recyclerView = binding.postsList
         val layoutManager = GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = PostsAdapter(posts)
+        recyclerView.adapter = PostsAdapter(posts) { post ->
+            startActivity(commentActivityIntent(this, author, post))
+        }
     }
 
     companion object {

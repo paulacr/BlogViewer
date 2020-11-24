@@ -7,5 +7,6 @@ data class CommentResponse(
     val date: String,
     @SerializedName("body")
     val comment: String,
-    val username: String
+    @SerializedName("userName")
+    val username: String?
 )

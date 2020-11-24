@@ -3,57 +3,67 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-        <!--Extra layout level for accessibility purposes-->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+    <data>
+
+        <variable
+            name="comment"
+            type="com.paulacr.domain.Comment" />
+
+    </data>
+
+    <!--Extra layout level for accessibility purposes-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/date"
+            style="@style/Title"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/default_dimen_16dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{comment.date.toString()}"
             app:layout_constraintEnd_toEndOf="parent"
-            android:focusable="true"
-            android:focusableInTouchMode="true">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="24/11" />
 
-            <TextView
-                android:id="@+id/date"
-                style="@style/Title"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginStart="@dimen/default_dimen_16dp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="24/11" />
+        <TextView
+            android:id="@+id/body"
+            style="@style/Description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_dimen_4dp"
+            android:layout_marginTop="@dimen/default_dimen_8dp"
+            android:layout_marginEnd="@dimen/default_dimen_4dp"
+            android:gravity="center_vertical"
+            android:text="@{comment.comment}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/date"
+            tools:text="Some content of some text body that can be a small one or even a big one, who knows?" />
 
-            <TextView
-                android:id="@+id/body"
-                style="@style/Description"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginStart="@dimen/default_dimen_4dp"
-                android:layout_marginEnd="@dimen/default_dimen_4dp"
-                app:layout_constraintTop_toBottomOf="@id/date"
-                tools:text="Some content of some text body that can be a small one or even a big one, who knows?"
-                android:layout_marginTop="@dimen/default_dimen_8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                />
+        <TextView
+            android:id="@+id/username"
+            style="@style/Description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_dimen_4dp"
+            android:layout_marginEnd="@dimen/default_dimen_4dp"
+            android:gravity="center_vertical"
+            android:text="@{String.format(@string/username_prefix, comment.username)}"
 
-            <TextView
-                android:id="@+id/username"
-                style="@style/Description"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_marginStart="@dimen/default_dimen_4dp"
-                android:layout_marginEnd="@dimen/default_dimen_4dp"
-                app:layout_constraintTop_toBottomOf="@id/body"
-                tools:text="username"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/body"
+            tools:text="username" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
