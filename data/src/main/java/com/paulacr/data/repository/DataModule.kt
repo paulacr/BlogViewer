@@ -1,6 +1,7 @@
 package com.paulacr.data.repository
 
 import com.paulacr.data.mapper.AuthorMapper
+import com.paulacr.data.mapper.CommentsMapper
 import com.paulacr.data.mapper.PostMapper
 import com.paulacr.data.network.ApiService
 import com.paulacr.data.usecase.AuthorUseCase
@@ -23,6 +24,6 @@ class DataModule {
         BlogRepositoryImpl(pagingSource)
 
     @Provides
-    fun providePagingSource(apiService: ApiService, authorMapper: AuthorMapper, postMapper: PostMapper): GetAuthorsPagingSource =
-        GetAuthorsPagingSource(apiService, authorMapper, postMapper)
+    fun providePagingSource(apiService: ApiService, authorMapper: AuthorMapper, postMapper: PostMapper, commentsMapper: CommentsMapper): GetAuthorsPagingSource =
+        GetAuthorsPagingSource(apiService, authorMapper, postMapper, commentsMapper)
 }

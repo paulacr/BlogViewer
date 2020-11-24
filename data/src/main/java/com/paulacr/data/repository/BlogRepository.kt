@@ -5,6 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.rxjava2.flowable
 import com.paulacr.domain.Author
+import com.paulacr.domain.Comment
 import com.paulacr.domain.Post
 import io.reactivex.Flowable
 import io.reactivex.Single
@@ -15,6 +16,8 @@ interface BlogRepository {
     fun getAuthors(): Flowable<PagingData<Author>>
 
     fun getPostsByAuthorId(id: Int): Single<List<Post>>
+
+    fun getCommentsByPostId(postId: Int): Single<List<Comment>>
 }
 
 class BlogRepositoryImpl @Inject constructor(private val pagingSource: GetAuthorsPagingSource) : BlogRepository {
@@ -31,5 +34,7 @@ class BlogRepositoryImpl @Inject constructor(private val pagingSource: GetAuthor
         ).flowable
 
     override fun getPostsByAuthorId(id: Int): Single<List<Post>> = pagingSource.getPostsByAuthorId(id)
+
+    override fun getCommentsByPostId(postId: Int): Single<List<Comment>> = pagingSource.getCommentsByPostId(postId)
 
 }

@@ -3,12 +3,12 @@
 
     <!-- Margins/components size   -->
     <dimen name="default_dimen_16dp">16dp</dimen>
-    <dimen name="default_dimen_250dp">250dp</dimen>
     <dimen name="default_dimen_4dp">4dp</dimen>
     <dimen name="default_dimen_8dp">8dp</dimen>
 
     <!--Text Sizes-->
     <dimen name="default_text_size_16dp">16dp</dimen>
     <dimen name="default_text_size_14dp">14dp</dimen>
+    <dimen name="default_dimen_16sp">16sp</dimen>
 
 </resources>

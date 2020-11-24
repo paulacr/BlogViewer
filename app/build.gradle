@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId "com.paulacr.blogviewer"
-        minSdkVersion 26
+        minSdkVersion 25
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -70,6 +70,9 @@ dependencies {
     // RxJava
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
     implementation "io.reactivex.rxjava2:rxjava:$rxjavaVersion"
+
+    // DateTime
+    implementation "com.jakewharton.threetenabp:threetenabp:$datetime"
 
     // Tests
     testImplementation "junit:junit:$jUnitVersion"

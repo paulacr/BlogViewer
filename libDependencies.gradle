@@ -24,6 +24,9 @@ ext {
     ext.hiltTesting = '2.29.1-alpha'
     ext.roboelectricAnnotationsVersion = '4.4'
 
+    // DateTime
+    ext.datetime = '1.2.1'
+
     // Tests
     jUnitVersion = '4.13.1'
     androidTestJUnitVersion = '1.1.2'
