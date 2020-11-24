@@ -16,7 +16,7 @@ class CommentsViewModel @ViewModelInject constructor(private val useCase: Author
     val postsLiveData = MutableLiveData<ViewState<List<Comment>>>()
 
     fun getCommentsByUsername(postId: Int) {
-        useCase.getCommentsByUsername(postId)
+        useCase.getCommentsByPostId(postId)
             .doOnSubscribe {
                 postsLiveData.postValue(ViewState.Loading())
             }

@@ -3,7 +3,6 @@
 
     <!-- Margins/components size   -->
     <dimen name="default_dimen_16dp">16dp</dimen>
-    <dimen name="default_dimen_250dp">250dp</dimen>
     <dimen name="default_dimen_4dp">4dp</dimen>
     <dimen name="default_dimen_8dp">8dp</dimen>
 

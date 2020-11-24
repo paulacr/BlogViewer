@@ -21,7 +21,7 @@ interface ApiService {
     ): Single<List<PostResponse>>
 
     @GET("/posts/{postId}/comments?_sort=date&_order=asc")
-    fun getCommentsByUsername(
+    fun getCommentsByPostId(
         @Path("postId") postId: Int
     ): Single<List<CommentResponse>>
 }

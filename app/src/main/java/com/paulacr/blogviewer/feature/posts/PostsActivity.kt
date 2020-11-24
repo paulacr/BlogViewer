@@ -7,13 +7,9 @@ import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.PagerSnapHelper
 import com.paulacr.blogviewer.ViewState
 import com.paulacr.blogviewer.databinding.ActivityDetailBinding
-import com.paulacr.blogviewer.feature.authors.AuthorsListAdapter
 import com.paulacr.blogviewer.feature.comments.CommentsActivity.Companion.commentActivityIntent
 import com.paulacr.domain.Author
 import com.paulacr.domain.Post
