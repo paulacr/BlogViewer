@@ -4,8 +4,9 @@ import com.paulacr.data.mapper.AuthorMapper
 import com.paulacr.data.mapper.CommentsMapper
 import com.paulacr.data.mapper.PostMapper
 import com.paulacr.data.network.ApiService
-import com.paulacr.data.usecase.AuthorUseCase
-import com.paulacr.data.usecase.AuthorUseCaseImpl
+import com.paulacr.domain.usecase.BlogRepository
+import com.paulacr.domain.usecase.PostsUseCase
+import com.paulacr.domain.usecase.PostsUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,8 +17,8 @@ import dagger.hilt.android.components.ApplicationComponent
 class DataModule {
 
     @Provides
-    fun provideAuthorUseCase(repository: BlogRepository): AuthorUseCase =
-        AuthorUseCaseImpl(repository)
+    fun provideAuthorUseCase(repository: BlogRepository): PostsUseCase =
+        PostsUseCaseImpl(repository)
 
     @Provides
     fun provideAuthorRepository(pagingSource: GetAuthorsPagingSource): BlogRepository =

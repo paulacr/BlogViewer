@@ -9,7 +9,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.paulacr.blogviewer.ViewState
 import com.paulacr.blogviewer.databinding.ActivityCommentsBinding
 import com.paulacr.domain.Author
@@ -69,9 +68,6 @@ class CommentsActivity : AppCompatActivity() {
     private fun setPostInfo(post: Post) {
         Glide.with(this)
             .load(post.postUrl)
-            .apply(RequestOptions())
-            .override(200)
-            .centerInside()
             .into(binding.postInfo.postImageUrl)
 
         binding.postInfo.post = post

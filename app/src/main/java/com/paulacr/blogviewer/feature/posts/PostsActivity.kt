@@ -26,7 +26,20 @@ class PostsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setupObserver()
 
+        author = intent.extras?.get(AUTHOR_EXTRA_KEY) as Author
+        author.apply {
+            binding.authorInfo.text = author.name
+            detailsViewModel.getPostsByAuthorId(id)
+        }
+
+        binding.errorState.setOnClickListener {
+            detailsViewModel.getPostsByAuthorId(author.id)
+        }
+    }
+
+    private fun setupObserver() {
         detailsViewModel.postsLiveData.observe(this, {
             when (it) {
                 is ViewState.Success -> {
@@ -49,12 +62,6 @@ class PostsActivity : AppCompatActivity() {
                 }
             }
         })
-
-        author = intent.extras?.get(AUTHOR_EXTRA_KEY) as Author
-        author.apply {
-            binding.authorInfo.text = author.name
-            detailsViewModel.getPostsByAuthorId(id)
-        }
     }
 
     private fun setupList(posts: List<Post>) {

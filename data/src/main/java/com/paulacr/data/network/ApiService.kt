@@ -1,8 +1,8 @@
 package com.paulacr.data.network
 
-import com.paulacr.domain.AuthorResponse
-import com.paulacr.domain.CommentResponse
-import com.paulacr.domain.PostResponse
+import com.paulacr.data.responsedata.AuthorResponse
+import com.paulacr.data.responsedata.CommentResponse
+import com.paulacr.data.responsedata.PostResponse
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path

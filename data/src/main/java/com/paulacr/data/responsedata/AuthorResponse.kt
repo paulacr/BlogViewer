@@ -1,4 +1,4 @@
-package com.paulacr.domain
+package com.paulacr.data.responsedata
 
 import com.google.gson.annotations.SerializedName
 

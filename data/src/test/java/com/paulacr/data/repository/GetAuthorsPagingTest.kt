@@ -5,6 +5,10 @@ import com.paulacr.data.mapper.AuthorMapper
 import com.paulacr.data.mapper.CommentsMapper
 import com.paulacr.data.mapper.PostMapper
 import com.paulacr.data.network.ApiService
+import com.paulacr.data.responsedata.AddressResponse
+import com.paulacr.data.responsedata.AuthorResponse
+import com.paulacr.data.responsedata.CommentResponse
+import com.paulacr.data.responsedata.PostResponse
 import com.paulacr.domain.*
 import io.mockk.MockKAnnotations
 import io.mockk.every

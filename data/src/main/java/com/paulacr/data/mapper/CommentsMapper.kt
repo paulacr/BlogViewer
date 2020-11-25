@@ -3,7 +3,7 @@ package com.paulacr.data.mapper
 import com.paulacr.data.common.getDateTime
 import com.paulacr.data.common.getYearMonthDayDate
 import com.paulacr.domain.Comment
-import com.paulacr.domain.CommentResponse
+import com.paulacr.data.responsedata.CommentResponse
 import javax.inject.Inject
 
 class CommentsMapper @Inject constructor() {
