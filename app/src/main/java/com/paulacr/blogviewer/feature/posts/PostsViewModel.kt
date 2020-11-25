@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import com.paulacr.blogviewer.BaseViewModel
 import com.paulacr.blogviewer.ViewState
 import com.paulacr.data.common.logError
-import com.paulacr.domain.usecase.PostsUseCase
 import com.paulacr.domain.Post
+import com.paulacr.domain.usecase.PostsUseCase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 

@@ -6,8 +6,8 @@ import androidx.paging.PagingData
 import com.paulacr.blogviewer.BaseViewModel
 import com.paulacr.blogviewer.ViewState
 import com.paulacr.data.common.logError
-import com.paulacr.domain.usecase.PostsUseCase
 import com.paulacr.domain.Author
+import com.paulacr.domain.usecase.PostsUseCase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
