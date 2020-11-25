@@ -29,6 +29,9 @@ class AuthorsListActivity : AppCompatActivity() {
         binding = ActivityAuthorsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         observeAuthorsLiveData()
+        binding.errorState.setOnClickListener {
+            listViewModel.getAuthors()
+        }
     }
 
     override fun onResume() {
