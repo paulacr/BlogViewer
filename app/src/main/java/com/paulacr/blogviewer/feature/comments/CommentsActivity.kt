@@ -56,6 +56,9 @@ class CommentsActivity : AppCompatActivity() {
             commentsViewModel.getCommentsByUsername(post.id)
         }
         setPostInfo(post)
+        binding.errorState.setOnClickListener {
+            commentsViewModel.getCommentsByUsername(post.id)
+        }
     }
 
     private fun setupList(comments: List<Comment>) {
