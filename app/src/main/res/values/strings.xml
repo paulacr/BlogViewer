@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BlogViewer</string>
+    <string name="retry">Retry</string>
+    <string name="username_prefix">Username: %1$s</string>
 </resources>
