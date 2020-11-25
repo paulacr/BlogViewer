@@ -69,9 +69,6 @@ class CommentsActivity : AppCompatActivity() {
     private fun setPostInfo(post: Post) {
         Glide.with(this)
             .load(post.postUrl)
-            .apply(RequestOptions())
-            .override(200)
-            .centerInside()
             .into(binding.postInfo.postImageUrl)
 
         binding.postInfo.post = post

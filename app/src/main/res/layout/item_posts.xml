@@ -19,15 +19,14 @@
         <ImageView
             android:id="@+id/postImageUrl"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:scaleType="centerCrop"
             android:contentDescription="@null"
             android:src="@mipmap/ic_launcher"
             app:imageUrl="@{post.postUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.444" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!--Extra layout level for accessibility purposes-->
         <androidx.constraintlayout.widget.ConstraintLayout

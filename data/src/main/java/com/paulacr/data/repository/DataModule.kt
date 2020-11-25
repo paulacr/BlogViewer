@@ -4,8 +4,9 @@ import com.paulacr.data.mapper.AuthorMapper
 import com.paulacr.data.mapper.CommentsMapper
 import com.paulacr.data.mapper.PostMapper
 import com.paulacr.data.network.ApiService
-import com.paulacr.data.usecase.PostsUseCase
-import com.paulacr.data.usecase.PostsUseCaseImpl
+import com.paulacr.domain.usecase.BlogRepository
+import com.paulacr.domain.usecase.PostsUseCase
+import com.paulacr.domain.usecase.PostsUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

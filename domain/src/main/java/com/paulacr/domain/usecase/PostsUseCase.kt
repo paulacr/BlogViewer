@@ -1,7 +1,6 @@
-package com.paulacr.data.usecase
+package com.paulacr.domain.usecase
 
 import androidx.paging.PagingData
-import com.paulacr.data.repository.BlogRepository
 import com.paulacr.domain.Author
 import com.paulacr.domain.Comment
 import com.paulacr.domain.Post
